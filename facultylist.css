@@ -1,0 +1,417 @@
+* {
+    margin: 0;
+
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    overflow-x: hidden;
+}
+
+.top-bar {
+    background-color: #3f51b5;
+    color: white;
+    padding: 17px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1000;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #333;
+    color: white;
+    position: fixed;
+    top: 60px; /* Below the top bar */
+    left: 0;
+    height: calc(100vh - 60px); /* Full height minus top bar */
+    overflow-y: auto;
+    transform: translateX(-250px); /* Hidden by default */
+    transition: transform 0.3s ease;
+    padding: 20px;
+    z-index: 900;
+}
+
+.sidebar.active {
+    transform: translateX(0);
+}
+
+.sidebar .menu-items {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar .menu-items li {
+    padding: 10px 0;
+}
+
+.sidebar .menu-items a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.sidebar .menu-items a:hover {
+    background-color: #575757;
+}
+
+.content {
+    margin-left: 0;
+    padding: 20px;
+    flex: 1;
+    transition: margin-left 0.3s ease;
+}
+
+.content.shifted {
+    margin-left: 250px;
+}
+
+.menu-toggle {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background: #333;
+    margin: 5px 0;
+    transition: 0.3s;
+}
+
+.card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.tblb {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.NewButton {
+    background-color: #3f51b5;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.NewButton:hover {
+    background-color: #303f9f;
+}
+
+.entries-select {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-input {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-left: 10px;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.faculty-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.faculty-table th, .faculty-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.faculty-table th {
+    background-color: #3f51b5;
+    color: white;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+}
+
+.popup .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .content.shifted {
+        margin-left: 0;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}
+/* Popup Styles */
+.popup {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.5);
+justify-content: center;
+align-items: center;
+z-index: 1000;
+}
+
+.popup-content {
+background: #fff;
+padding: 20px;
+border-radius: 5px;
+width: 90%;
+max-width: 500px;
+position: relative;
+}
+
+.popup .close {
+position: absolute;
+top: 10px;
+right: 10px;
+cursor: pointer;
+font-size: 20px;
+color: #333;
+}
+
+.popup h3 {
+margin-top: 0;
+margin-bottom: 20px;
+font-size: 18px;
+color: #333;
+}
+
+.popup form {
+display: flex;
+flex-direction: column;
+}
+
+.popup label {
+margin-bottom: 5px;
+font-weight: bold;
+}
+
+.popup input[type="text"],
+.popup input[type="email"],
+.popup select {
+padding: 8px;
+border-radius: 5px;
+border: 1px solid #ddd;
+margin-bottom: 15px;
+}
+
+
+/* Edit Button Style */
+.edit-button {
+background-color: #4caf50; /* Green color for edit */
+color: white;
+border: none;
+padding: 10px 15px;
+font-size: 16px;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s, transform 0.2s;
+margin-right: 5px; /* Small margin between buttons */
+}
+
+.edit-button:hover {
+background-color: #388e3c; /* Darker green for hover */
+}
+
+.edit-button:focus {
+outline: none;
+box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.5); /* Focus outline for accessibility */
+}
+
+.edit-button:active {
+transform: scale(0.98); /* Slight scaling effect for button press */
+}
+
+/* Delete Button Style */
+.delete-button {
+background-color: #f44336; /* Red color for delete */
+color: white;
+border: none;
+padding: 10px 15px;
+font-size: 16px;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s, transform 0.2s;
+}
+
+.delete-button:hover {
+background-color: #c62828; /* Darker red for hover */
+}
+
+.delete-button:focus {
+outline: none;
+box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.5); /* Focus outline for accessibility */
+}
+
+.delete-button:active {
+transform: scale(0.98); /* Slight scaling effect for button press */
+}
+/* View Button Style */
+.view-button {
+background-color: #2196f3; /* Blue color for view */
+color: white;
+border: none;
+padding: 10px 15px;
+font-size: 16px;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s, transform 0.2s;
+margin-right: 5px; 
+margin-left: 5px;/* Small margin between buttons */
+}
+
+.view-button:hover {
+background-color: #1976d2; /* Darker blue for hover */
+}
+
+.view-button:focus {
+outline: none;
+box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.5); /* Focus outline for accessibility */
+}
+
+.view-button:active {
+transform: scale(0.98); /* Slight scaling effect for button press */
+}
+form button {
+background-color: #4CAF50;
+color: white;
+padding: 9px 15px;
+border: none;
+border-radius: 3px;
+cursor: pointer;
+font-size: 14px;
+margin-right: 10px;
+width: 20%;
+}
+
+/* Cancel button styling */
+form button[type="button"] {
+background-color: #f44336;
+}
+
+/* Button hover effects */
+form button:hover {
+opacity: 0.9;
+}
+.logout-button {
+background-color: #ff4d4d;
+border: none;
+color: white;
+padding: 10px 15px;
+font-size: 16px;
+border-radius: 5px;
+cursor: pointer;
+margin-right: 20px;
+width: 5%;
+}
+
+.logout-button:hover {
+background-color: #e04444;
+}
+    /* Toaster Notification */
+    #toaster {
+        visibility: hidden;
+        min-width: 250px;
+        margin-left: -125px;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        border-radius: 2px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1;
+        left: 50%;
+        bottom: 30px;
+        font-size: 17px;
+    }
+
+    #toaster.show {
+        visibility: visible;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+/* Cancel Notification Style */
+.cancel-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #e74c3c; /* Red background for cancel notification */
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 9999;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.cancel-notification.show {
+    display: block;
+    opacity: 1;
+}

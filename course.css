@@ -1,0 +1,289 @@
+
+body {
+    font-family: "Lato", sans-serif;
+  }
+  
+  /* Fixed sidenav, full height */
+
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+  .shadowbox {
+    width: 92%;
+    border: 1px solid #333;
+    box-shadow: 8px 8px 5px #444;
+    padding: 8px 12px;
+    background-color:#fefffe;
+    margin-top: 30px;
+    margin-left: 35px;
+  }
+
+
+
+.form-container, .course-list {
+    background-color: #fff;
+    padding: 20px;
+    margin: 10px auto;
+    width: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.form-container {
+    position: relative;
+    left: 57px;
+    top: 60px;
+    width: 400px;
+    float: left;
+    border-radius: 10px;
+}
+
+.course-list {
+    position: relative;
+    right: 50px;
+    top: 60px;
+    width: 700px; /* Adjust width for course list */
+    float: right; /* Align course list to the left */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 5px; /* Reduce padding for smaller inputs */
+    margin-bottom: 10px; /* Reduce margin for smaller inputs */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    display: block;
+    width: 102%;
+    padding: 15px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+input#search {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 8px;;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px; /* Reduce padding for more compact table */
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.action-btn {
+    margin-right: 5px;
+    padding: 5px 10px;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background-color: #28a745;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+}
+
+  
+
+  
+  /* Style for the logout button */
+  .logout-button {
+    background-color: #ff4d4d;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 20px;
+    width: 5%;
+  }
+  
+  .logout-button:hover {
+    background-color: #e04444;
+  }
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            overflow-x: hidden;
+        }
+        
+        /* Top Bar Styling */
+        .top-bar {
+            background-color: #3f51b5;
+            color: white;
+            padding: 17px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        /* Sidebar Styling */
+        .sidebar {
+            width: 250px;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            top: 60px; /* Below the top bar */
+            left: 0;
+            height: calc(100vh - 60px); /* Full height minus top bar */
+            overflow-y: auto;
+            transform: translateX(-250px); /* Hidden by default */
+            transition: transform 0.3s ease;
+            padding: 20px;
+            z-index: 900;
+        }
+        
+        .sidebar .menu-items {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .sidebar .menu-items li {
+            padding: 10px 0;
+        }
+        
+        .sidebar .menu-items a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        .sidebar .menu-items a:hover {
+            background-color: #575757;
+        }
+        
+        /* Wrapper for Sidebar and Content */
+        .wrapper {
+            display: flex;
+            height: calc(100vh - 60px); /* Adjusting height for full viewport minus top bar */
+            position: relative;
+        }
+        
+        /* Content Styling */
+        .content {
+            margin-left: 0px;
+            padding: 20px;
+            flex: 1;
+            transition: margin-left 0.3s ease;
+        }
+        
+        /* Form Container Styling */
+
+        
+        /* Course List Styling */
+   
+        /* Table Styling */
+  
+        
+        #courseTable th, #courseTable td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        
+        #courseTable th {
+            background-color: #3f51b5;
+            color: white;
+        }
+        
+        /* Menu Toggle Button for Mobile */
+        .menu-toggle {
+            position: absolute;
+            top: 21px;
+            left: 20px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        
+        .menu-toggle span {
+            display: block;
+            width: 30px;
+            height: 3px;
+            background: #333;
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+        
+        /* Action Buttons */
+        .action-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #fff;
+            transition: background-color 0.3s ease;
+        }
+        
+        .edit-btn {
+            background-color: #4caf50;
+        }
+        
+        .delete-btn {
+            background-color: #f44336;
+        }
+        
+        .action-btn:hover {
+            opacity: 0.8;
+        }
+        
+ 
+
+  

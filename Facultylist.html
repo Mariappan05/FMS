@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Management System - Faculty List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="facultylist.css">
+
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <h2 style="margin-left: 40px;">Faculty Management System</h2>
+        <button class="logout-button" onclick="logout()">Logout</button>
+    </div>
+
+    <!-- Sidebar -->
+    <div id="sidebar" class="sidebar">
+        <ul class="menu-items">
+            <li><a href="index.html"><i class="fa-solid fa-house-chimney"></i> Home</a></li>
+            <li><a href="courselist.html"><i class="fa-solid fa-bars"></i> Course List</a></li>
+            <li><a href="subjectlist.html"><i class="fa-solid fa-book"></i> Subject List</a></li>
+            <li><a href="Facultylist.html"><i class="fa-solid fa-user"></i> Faculty List</a></li>
+            <li><a href="Schedule.html"><i class="fa-solid fa-calendar-days"></i> Schedule</a></li>
+            <li><a href="Users.html"><i class="fa-solid fa-users"></i> Users</a></li>
+        </ul>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <div id="menuToggle" class="menu-toggle" onclick="toggleSidebar()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="card">
+            <div class="tblb">
+                <div style="margin: 0px 0 0 0px;">
+                    <button class="NewButton" onclick="openPopup_new()"><i class="fa-solid fa-plus"></i> New </button>
+                </div>
+              
+                <h5 style="margin-left: -63%;">Show entries:</h5>
+                <select style="margin-left: -63%;" class="entries-select">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+              
+                <div class="search-container" style="float: right;">
+                    <h5 style="display: inline-block;">Search:</h5>
+                    <input type="text" class="search-input" oninput="searchTable(this.value)">
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table id="myTable" class="faculty-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Address</th>
+                            <th>Contact</th>
+                            <th>Gender</th>
+                            <th style="width: 16%;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample Row -->
+                        <tr>
+                            <td>1</td>
+                            <td>John Doe</td>
+                            <td>johndoe@example.com</td>
+                            <td>123 Main St</td>
+                            <td>555-1234</td>
+                            <td>Male</td>
+                            <td>
+                            <i class="fa-solid fa-pen-to-square" onclick="openPopupEdit(this)" style="color: #9ea8b4; padding: 0px 20px 0px 22px; cursor:pointer;"></i>
+                            <i class="fa-solid fa-trash" onclick="confirmDelete()"style="color: #d77c7c; padding: 0px 20px 0px 9px; cursor:pointer;"></i>
+                            <i class="fa-solid fa-eye fa" onclick="openPopupview(this)"style="color: #55c4a2; padding: 0px 20px 0px 9px; cursor:pointer;"></i>
+                               
+                            </td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Faculty Popup -->
+    <div id="popup_new" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup_new()">&times;</span>
+            <h3>Add New Faculty</h3>
+            <form id="entryForm" onsubmit="return saveForm()">
+                <label for="idno">ID No:</label>
+                <input type="text" id="idno" name="idno" required>
+
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required>
+
+                <label for="contact">Contact:</label>
+                <input type="text" id="contact" name="contact"pattern="[0-9]*" inputmode="numeric" required>
+
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+
+                <button type="submit"> <i class="fa-duotone fa-solid fa-paper-plane"></i> Save</button>
+                <button type="button" style="margin: -35px 0px 0px 21%;" onclick="closePopup_new()"><i class="fa-solid fa-xmark"></i> Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Faculty Popup -->
+    <div id="popup_edit" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopupEdit()">&times;</span>
+            <h3>Edit Faculty Details</h3>
+            <form id="editForm" onsubmit="return saveEditForm()">
+                <label for="idno-edit">ID No:</label>
+                <input type="text" id="idno-edit" name="idno-edit" required>
+
+                <label for="name-edit">Name:</label>
+                <input type="text" id="name-edit" name="name-edit" required>
+
+                <label for="email-edit">Email:</label>
+                <input type="email" id="email-edit" name="email-edit" required>
+
+                <label for="address-edit">Address:</label>
+                <input type="text" id="address-edit" name="address-edit" required>
+
+                <label for="contact-edit">Contact:</label>
+                <input type="text" id="contact-edit" name="contact-edit"pattern="[0-9]*" inputmode="numeric" required>
+
+                <label for="gender-edit">Gender:</label>
+                <select id="gender-edit" name="gender-edit">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+
+                <button type="submit"> <i class="fa-duotone fa-solid fa-paper-plane"></i> Save</button>
+                <button type="button" style="margin: -35px 0px 0px 21%;" onclick="closePopupEdit()"><i class="fa-solid fa-xmark"></i> Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <!--View Popup-->
+    <div id="popup_view" class="popup">    
+    <div class="popup-content">
+        <span class="close" onclick="viewPopupEdit()">&times;</span>
+        <h3>View Faculty Details</h3>
+        <form id="viewForm" onsubmit="">
+        <label for="idno-view">ID No:</label>
+        
+        <input type="text" id="idno-view" name="idno-view" disabled>
+      
+        <label for="name-view">Name:</label>
+        
+        <input type="text" id="name-view" name="name-view" disabled>
+        
+        <label for="email-view">Email:</label>
+        
+        <input type="email" id="email-view" name="email-view" disabled>
+      
+        <label for="address-view">Address:</label>
+        
+        <input type="text" id="address-view" name="address-view" disabled>
+        
+        <label for="contact-view">Contact:</label>
+        
+        <input type="text" id="contact-view" name="contact-view" disabled>
+        
+        <label for="gender-view">Gender:</label>
+       
+        <input type="text" id="gender-view" name="gender-view" disabled>
+    </form>
+
+    </div>
+</div>
+    <!-- Toaster -->
+    <div id="toaster" class="toaster">Action Successful!</div>
+    <!-- Cancel Notification -->
+    <div id="cancelNotification" class="cancel-notification">Action Canceled!</div>
+
+
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const content = document.querySelector('.content');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('active');
+            content.classList.toggle('shifted');
+        }
+
+        function logout() {
+            alert('Logging out...');
+            window.location.href = "login.html";
+            // Redirect or perform actual logout action
+        }
+
+        const popup_new = document.getElementById('popup_new');
+        const popup_edit = document.getElementById('popup_edit');
+        const popup_view = document.getElementById('popup_view');
+
+        function openPopup_new() {
+            popup_new.style.display = 'flex';
+        }
+
+        function closePopup_new() {
+            popup_new.style.display = 'none';
+        }
+
+        function openPopupEdit(button) {
+            const row = button.parentElement.parentElement;
+            const cells = row.getElementsByTagName('td');
+
+            document.getElementById('idno-edit').value = cells[0].innerText;
+            document.getElementById('name-edit').value = cells[1].innerText;
+            document.getElementById('email-edit').value = cells[2].innerText;
+            document.getElementById('address-edit').value = cells[3].innerText;
+            document.getElementById('contact-edit').value = cells[4].innerText;
+            document.getElementById('gender-edit').value = cells[5].innerText.toLowerCase();
+
+            popup_edit.style.display = 'flex';
+        }
+        function openPopupview(button) {
+            const row = button.parentElement.parentElement;
+            const cells = row.getElementsByTagName('td');
+
+            document.getElementById('idno-view').value = cells[0].innerText;
+            document.getElementById('name-view').value = cells[1].innerText;
+            document.getElementById('email-view').value = cells[2].innerText;
+            document.getElementById('address-view').value = cells[3].innerText;
+            document.getElementById('contact-view').value = cells[4].innerText;
+            document.getElementById('gender-view').value = cells[5].innerText.toLowerCase();
+
+            popup_view.style.display = 'flex';
+        }
+
+        function closePopupEdit() {
+            popup_edit.style.display = 'none';
+        }
+        function viewPopupEdit() {
+            popup_view.style.display = 'none';
+        }
+
+        function confirmDelete() {
+            if (confirm('Are you sure you want to delete this entry?')) {
+                showToaster('Entry deleted successfully!');
+            }
+        }
+
+        function searchTable(query) {
+            const table = document.getElementById('myTable');
+            const tr = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < tr.length; i++) {
+                const tdArray = tr[i].getElementsByTagName('td');
+                let matched = false;
+
+                for (let j = 0; j < tdArray.length - 1; j++) {
+                    if (tdArray[j]) {
+                        const textValue = tdArray[j].textContent || tdArray[j].innerText;
+                        if (textValue.toLowerCase().indexOf(query.toLowerCase()) > -1) {
+                            matched = true;
+                            break;
+                        }
+                    }
+                }
+                tr[i].style.display = matched ? '' : 'none';
+            }
+        }
+
+        function saveForm() {
+            const form = document.getElementById('entryForm');
+            
+            if (!form.checkValidity()) {
+                form.reportValidity(); // Show validation messages
+                showToaster('Please fill in all required fields.', 'error');
+                return false; // Prevent form submission
+            }
+            
+            showToaster('New entry saved successfully!');
+            form.reset();
+            closePopup_new();
+            
+            return false; // Prevent default form submission
+        }
+
+        function saveEditForm() {
+            const form = document.getElementById('editForm');
+            
+            if (!form.checkValidity()) {
+                form.reportValidity(); // Show validation messages
+                showToaster('Please fill in all required fields.', 'error');
+                return false; // Prevent form submission
+            }
+            
+            showToaster('Entry updated successfully!');
+            form.reset();
+            closePopupEdit();
+            
+            return false; // Prevent default form submission
+        }
+
+        function showToaster(message) {
+            const toaster = document.getElementById('toaster');
+            toaster.textContent = message;
+            toaster.classList.add('show');
+            
+            setTimeout(() => {
+                toaster.classList.remove('show');
+            }, 3000);
+        }
+        function showCancelNotification(message) {
+            const cancelNotification = document.getElementById('cancelNotification');
+            cancelNotification.textContent = message;
+            cancelNotification.classList.add('show');
+            
+            setTimeout(() => {
+                cancelNotification.classList.remove('show');
+            }, 3000);
+        }
+        
+    </script>
+</body>
+</html>

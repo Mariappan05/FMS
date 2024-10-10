@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subject List</title>
+    <link rel="stylesheet" href="course.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="top-bar">
+        <h2 style="margin: 0px 0px 0px 40px;">Faculty Management System</h2>
+        <button class="logout-button" onclick="logout()">Logout</button>
+    </div>
+    <div class="wrapper">
+        <div id="sidebar" class="sidebar">
+            <ul class="menu-items">
+                <li><a href="index.html"><i class="fa-solid fa-house-chimney"></i> Home</a></li>
+                    <li><a href="courselist.html"><i class="fa-solid fa-bars"></i> Course List</a></li>
+                    <li><a href="subjectlist.html"><i class="fa-solid fa-book"></i> Subject List</a></li>
+                    <li><a href="Facultylist.html"><i class="fa-solid fa-user"></i> Faculty List</a></li>
+                    <li><a href="Schedule.html"><i class="fa-solid fa-calendar-days"></i> Schedule</a></li>
+                    <li><a href="Users.html"><i class="fa-solid fa-users"></i> Users</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div id="menuToggle" class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="form-container">
+                <h2>Add Subject</h2>
+                <form id="courseForm">
+                    <label for="courseName">Subject Name:</label>
+                    <input type="text" id="courseName" name="courseName" required>
+                    
+                    <label for="courseDescription">Subject Description:</label>
+                    <textarea id="courseDescription" name="courseDescription" required></textarea>
+                    
+                    <button type="submit">Save Subject</button>
+                </form>
+            </div>
+
+            <div class="course-list">
+                <h2>Subject List</h2>
+                <input type="text" id="search" placeholder="Search subject..." onkeyup="searchCourses()">
+                <table id="courseTable">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Subject Name</th>
+                            <th>Subject Description</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="courseList">
+                        <!-- Subject details will be appended here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function logout() {
+            alert("You have been logged out.");
+            window.location.href = "login.html";
+        }
+
+        let courses = [];
+        let editIndex = -1;
+
+        document.getElementById('courseForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const courseName = document.getElementById('courseName').value;
+            const courseDescription = document.getElementById('courseDescription').value;
+
+            if (editIndex === -1) {
+                courses.push({ name: courseName, description: courseDescription });
+            } else {
+                courses[editIndex] = { name: courseName, description: courseDescription };
+                editIndex = -1;
+            }
+
+            renderCourses();
+            document.getElementById('courseForm').reset();
+        });
+
+        function renderCourses() {
+            const courseList = document.getElementById('courseList');
+            courseList.innerHTML = '';
+
+            courses.forEach((course, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${course.name}</td>
+                    <td>${course.description}</td>
+                    <td>
+                        <button class="action-btn edit-btn" onclick="editCourse(${index})">Edit</button>
+                        <button class="action-btn delete-btn" onclick="deleteCourse(${index})">Delete</button>
+                    </td>
+                `;
+                courseList.appendChild(row);
+            });
+        }
+
+        function editCourse(index) {
+            document.getElementById('courseName').value = courses[index].name;
+            document.getElementById('courseDescription').value = courses[index].description;
+            editIndex = index;
+        }
+
+        function deleteCourse(index) {
+            courses.splice(index, 1);
+            renderCourses();
+        }
+
+        function searchCourses() {
+            const searchText = document.getElementById('search').value.toLowerCase();
+            const filteredCourses = courses.filter(course => 
+                course.name.toLowerCase().includes(searchText) ||
+                course.description.toLowerCase().includes(searchText)
+            );
+
+            const courseList = document.getElementById('courseList');
+            courseList.innerHTML = '';
+
+            filteredCourses.forEach((course, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${course.name}</td>
+                    <td>${course.description}</td>
+                    <td>
+                        <button class="action-btn edit-btn" onclick="editCourse(${index})">Edit</button>
+                        <button class="action-btn delete-btn" onclick="deleteCourse(${index})">Delete</button>
+                    </td>
+                `;
+                courseList.appendChild(row);
+            });
+        }
+
+        document.getElementById('menuToggle').addEventListener('click', function () {
+            var sidebar = document.getElementById('sidebar');
+            var content = document.querySelector('.content');
+            if (sidebar.style.transform === 'translateX(0%)') {
+                sidebar.style.transform = 'translateX(-250px)';
+                content.style.marginLeft = '0px';
+            } else {
+                sidebar.style.transform = 'translateX(0%)';
+                content.style.marginLeft = '250px';
+            }
+        });
+    </script>
+</body>
+</html>

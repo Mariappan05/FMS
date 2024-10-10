@@ -1,0 +1,142 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    overflow-x: hidden;
+}
+
+/* Top Bar Styling */
+.top-bar {
+    background-color: #3f51b5;
+    color: white;
+    padding: 17px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1000;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 250px;
+    background-color: #333;
+    color: white;
+    position: fixed;
+    top: 60px; /* Below the top bar */
+    left: 0;
+    height: calc(100vh - 60px); /* Full height minus top bar */
+    overflow-y: auto;
+    transform: translateX(-250px); /* Hidden by default */
+    transition: transform 0.3s ease;
+    padding: 20px;
+    z-index: 900;
+}
+
+.sidebar .menu-items {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar .menu-items li {
+    padding: 10px 0;
+}
+
+.sidebar .menu-items a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.sidebar .menu-items a:hover {
+    background-color: #575757;
+}
+
+/* Wrapper for Sidebar and Content */
+.wrapper {
+    display: flex;
+    height: calc(100vh - 60px); /* Adjusting height for full viewport minus top bar */
+    position: relative;
+}
+
+/* Content Styling */
+.content {
+    margin-left: 0px;
+    padding: 20px;
+    flex: 1;
+    transition: margin-left 0.3s ease;
+}
+
+/* Main Content Styling */
+.main {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Shadowbox Styling */
+.shadowbox {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Menu Toggle Button for Mobile */
+.menu-toggle {
+    position: absolute;
+    top:-50px;
+    left: 20px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background: #333;
+    margin: 5px 0;
+    transition: 0.3s;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .content {
+        margin-left: 0;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}
+.logout-button {
+    background-color: #ff4d4d;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 20px;
+    width: 5%;
+  }
+  
+  .logout-button:hover {
+    background-color: #e04444;
+  }
+  

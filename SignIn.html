@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Faculty Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #e8f0fe;
+        }
+
+        .container {
+            display: flex;
+            width: 900px;
+            height: 500px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .left-panel {
+            background: linear-gradient(135deg, #007acc 0%, #00c3ff 100%);
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+        }
+
+        .left-panel h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .left-panel p {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .left-panel a {
+            display: inline-block;
+            padding: 10px 30px;
+            border-radius: 30px;
+            background-color: white;
+            color: #007acc;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .left-panel a:hover {
+            background-color: #ffeb3b;
+            color: black;
+        }
+
+        .right-panel {
+            background-color: #fff;
+            width: 50%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        .right-panel h2 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #007acc;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px 12px 40px;
+            border-radius: 30px;
+            border: 1px solid #ccc;
+            outline: none;
+            background-color: #f0f0f0;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #00c3ff;
+            background-color: #f9f9f9;
+        }
+
+        .form-group i {
+            position: absolute;
+            left: 15px;
+            top: 12px;
+            font-size: 18px;
+            color: #888;
+        }
+
+        .login-button {
+            background-color: #007acc;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 30px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-button:hover {
+            background-color: #005ea8;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            color: #007acc;
+            font-size: 20px;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #005ea8;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="left-panel">
+            <h2>New here?</h2>
+            <p>Sign up to connect with healthcare professionals and take control of your well-being</p>
+            <a href="signup.html">SIGN UP</a>
+        </div>      
+        <div class="right-panel">
+            <h2>Sign in</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="username" name="username" placeholder="Username" required>
+                    <div class="error" id="usernameError"></div>
+                </div>
+                <div class="form-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                    <div class="error" id="passwordError"></div>
+                </div>
+                <button type="submit" class="login-button">Login</button>
+            </form>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-google"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const demoUsers = {
+            ravi: 'password123',
+            admin: 'admin123'
+        };
+        document.getElementById('loginForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            document.getElementById('usernameError').textContent = '';
+            document.getElementById('passwordError').textContent = '';       
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();           
+            let valid = true;
+            if (username === '') {
+                document.getElementById('usernameError').textContent = 'Username is required.';
+                valid = false;
+            }
+            if (password === '') {
+                document.getElementById('passwordError').textContent = 'Password is required.';
+                valid = false;
+            }           
+            if (valid) {
+                if (demoUsers[username] && demoUsers[username] === password) {
+                    alert('Login successful!');
+                    window.location.href = 'index.html'; 
+                } else {
+                    alert('Invalid username or password.');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
